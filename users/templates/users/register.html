@@ -1,0 +1,115 @@
+{% extends 'users/base.html' %} {% load crispy_forms_tags %} {% block content %}
+<form
+  method="POST"
+  novalidate
+  enctype="multipart/form-data"
+  class="col-xxl-6 col-xl-10 col-lg-10 col-md-10 col-sm-12 shadow-lg p-5 mx-auto"
+>
+  {% csrf_token %}
+  <fieldset class="form-group mb-5">
+    <legend class="border-bottom mb-4 text-center">
+      <h2>Join Now!</h2>
+    </legend>
+    {{form.email | as_crispy_field}}
+    {{form.password1 | as_crispy_field}} {{form.password2 | as_crispy_field}}
+
+    <!-- Faculty CheckBox -->
+    <div class="form-check form-switch py-3 mt-1" id="div_id_is_staff">
+      <input
+        name="is_staff"
+        class="form-check-input"
+        type="checkbox"
+        id="id_is_staff"
+        onclick="isStudent()"
+      />
+      <label class="form-check-label" for="id_is_staff"
+        >{{form.is_staff.label}}</label
+      >
+      <small id="hint_id_is_staff" class="form-text text-muted d-block"
+        >{{ form.is_staff.help_text }}</small
+      >
+    </div>
+
+    <!-- Branch Select -->
+    <div id="div_id_branch" class="form-group">
+      <label for="id_branch">
+        {{form.branch.label}}<span class="asteriskField">*</span>
+      </label>
+      <select name="branch" class="p-3 mt-1 form-select form-select-lg" id="id_branch">
+        {% for x, y in form.fields.branch.choices %}
+          <option value="{{ x }}" {% if form.fields.branch.value == x %}selected{% endif %}>{{ y | upper}}
+          </option>
+        {% endfor %}
+      </select>
+      <small id="hint_id_branch" class="form-text text-muted"
+        >{{form.branch.help_text}}</small
+      >
+    </div>
+
+    <div class="is_student" class="d-none">
+
+      <!-- Roll Number Input -->
+      {{form.roll_number | as_crispy_field}}
+
+      <!-- Section Select -->
+      <div id="div_id_section" class="form-group">
+        <label for="id_section">
+          {{form.section.label}}<span class="asteriskField">*</span>
+        </label>
+        <select name="section" class="p-3 mt-1 form-select form-select-lg" id="id_section">
+          {% for x, y in form.fields.section.choices %}
+            <option value="{{ x }}" {% if form.fields.section.value == x %}selected{% endif %}>{{ y | upper}}
+            </option>
+          {% endfor %}
+        </select>
+        <small id="hint_id_section" class="form-text text-muted"
+          >{{form.section.help_text}}</small
+        >
+      </div>
+
+      <!-- Semester Select -->
+      <div id="div_id_semester" class="form-group">
+        <label for="id_semester">
+          {{form.semester.label}}<span class="asteriskField">*</span>
+        </label>
+        <select name="semester" class="p-3 mt-1 form-select form-select-lg" id="id_semester">
+          {% for x, y in form.fields.semester.choices %}
+            <option value="{{ x }}" {% if form.fields.semester.value == x %}selected{% endif %}>{{ y | upper}}
+            </option>
+          {% endfor %}
+        </select>
+        <small id="hint_id_semester" class="form-text text-muted"
+          >{{form.semester.help_text}}</small
+        >
+      </div>
+    </div>
+
+
+    <!-- Image File Input -->
+    <div>
+      <label for="id_image" class="form-label">{{form.image.label}}</label>
+      <input
+        name="image"
+        class="form-control form-control-lg"
+        type="file"
+        id="id_image"
+        accept="image/*"
+      />
+      <small id="hint_id_image" class="form-text text-muted"
+        >{{ form.image.help_text }}</small
+      >
+    </div>
+  </fieldset>
+  <div class="form-group mt-3 text-center text-break text-wrap">
+    <button class="btn btn-outline-dark rounded-0 btn-lg" type="submit">
+      Sign Up & Create Profile
+    </button>
+  </div>
+  <div class="border-top pt-3 text-center">
+    <small
+      >Already have an account?
+      <a href="{% url 'login' %}" class="ms-1 text-dark">Sign In</a></small
+    >
+  </div>
+</form>
+{% endblock content %}

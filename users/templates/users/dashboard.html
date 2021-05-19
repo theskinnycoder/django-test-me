@@ -1,0 +1,29 @@
+{% extends 'users/base.html' %} {% block content %}
+<h1 class="text-decoration-underline text-center fw-bold text-uppercase">
+  Your Classrooms
+</h1>
+<h4 class="text-muted text-center mt-3">{{user.email}}</h4>
+<div class="row row-cols-1 row-cols-md-3 g-5 col-10 mx-auto my-4">
+  {% for classroom in classrooms %}
+  <a
+    href="{% url 'get_classroom' id=classroom.id %}"
+    class="text-decoration-none"
+  >
+    <div class="col shadow-lg">
+      <h1 class="fw-bold text-dark text-center pt-5">
+        {{ classroom.name | upper}}
+      </h1>
+      <div>
+        <h5 class="text-break px-5 text-muted">
+          {{ classroom.teacher.email }}
+        </h5>
+        <img
+          src="{{classroom.teacher.image.url}}"
+          class="card-img-bottom rounded-circle p-5 img-fluid"
+        />
+      </div>
+    </div>
+  </a>
+  {% endfor %}
+</div>
+{% endblock content %}

@@ -1,0 +1,86 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark p-4 sticky-top">
+  <div
+    class="
+      container
+      d-flex
+      flex-wrap
+      align-items-center
+      justify-content-between
+    "
+  >
+    <a class="navbar-brand" href="{% url 'dashboard' %}">TestMe</a>
+    {% if user.is_authenticated %}
+    <div class="d-flex justify-content-center align-items-center">
+      <span class="mx-2 text-white text-lowercase d-none d-sm-block"
+        >{{ user.email | upper }}</span
+      >
+      <div class="dropdown text-end">
+        <div
+          class="
+            link-light
+            d-block
+            text-decoration-none
+            dropdown-toggle
+            pointer-event
+          "
+          id="dropdownUser1"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          <img
+            src="{{user.image.url}}"
+            width="32"
+            height="32"
+            class="rounded-circle"
+          />
+        </div>
+        <ul
+          class="dropdown-menu text-small shadow-lg"
+          aria-labelledby="dropdownUser1"
+        >
+          <li><a class="dropdown-item" href="#">Take New Test</a></li>
+          <li><a class="dropdown-item" href="#">View Performance</a></li>
+          <li>
+            <a class="dropdown-item" href="{% url 'profile' %}">My Profile</a>
+          </li>
+          <li><hr class="dropdown-divider" /></li>
+          <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+        </ul>
+      </div>
+    </div>
+    {% else %}
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+      <ul class="navbar-nav text-center">
+        {% with url_name=request.resolver_match.url_name %}
+        <li class="nav-item">
+          <a
+            class="nav-link {%if url_name == 'login' %} active {%endif%}"
+            aria-current="page"
+            href="{% url 'login' %}"
+            >Login</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link {%if url_name == 'register' %} active {%endif%}"
+            href="{% url 'register' %}"
+            >Sign Up</a
+          >
+        </li>
+        {%endwith %}
+      </ul>
+    </div>
+    {% endif %}
+  </div>
+</nav>

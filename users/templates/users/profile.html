@@ -1,0 +1,55 @@
+{% extends "users/base.html" %} {% load crispy_forms_tags %} {% block content %}
+<div
+  class="
+    col-lg-10 col-12
+    shadow-lg
+    p-5
+    flex-wrap flex-md-nowrap
+    d-flex
+    justify-content-center
+    align-items-center
+    mx-auto
+    container
+  "
+>
+  <img
+    class="rounded-circle img-fluid shadow-lg border-5 border-dark border"
+    src="{{ user.image.url }}"
+  />
+  <div class="text-start float-end p-5 mt-2">
+    <table class="table table-sm table-hover">
+      <tbody>
+        <tr>
+          <th scope="row">Email</th>
+          <td class="text-break">{{ user.email }}</td>
+        </tr>
+        <tr>
+          <th scope="row">Branch</th>
+          <td>{{ user.branch | upper}}</td>
+        </tr>
+        <tr>
+          <th scope="row">Type</th>
+          {% if user.is_staff %}
+          <td>{{ 'Faculty' | capfirst }}</td>
+          {% else %}
+          <td>{{ 'Student' | capfirst}} {% endif %}</td>
+        </tr>
+        {% if user.is_student %}
+        <tr>
+          <th scope="row">Roll Number</th>
+          <td>{{ user.roll_number | upper }}</td>
+        </tr>
+        <tr>
+          <th scope="row">Section</th>
+          <td>{{ user.section }}</td>
+        </tr>
+        <tr>
+          <th scope="row">Semester</th>
+          <td>{{ user.semester }}</td>
+        </tr>
+        {% endif %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock content %}

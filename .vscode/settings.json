@@ -1,0 +1,12 @@
+{
+  "python.pythonPath": "/home/rahul/.local/share/virtualenvs/test-me-78wNYVu4/bin/python",
+  "python.linting.enabled": false,
+  "python.formatting.autopep8Path": "/home/rahul/.local/share/virtualenvs/test-me-78wNYVu4/bin/autopep8",
+  "editor.fontWeight": "bold",
+  "indentRainbow.ignoreErrorLanguages": ["python"],
+  "css.styleSheets": [
+    "../users/static/users/index.css",
+    "../users/static/users/bootstrap.min.css",
+    "https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+  ]
+}

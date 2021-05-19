@@ -1,0 +1,25 @@
+{% extends 'users/base.html' %} {% load crispy_forms_tags %} {% block content %}
+<form
+  method="POST"
+  novalidate
+  class="
+    col-xxl-6 col-xl-10 col-lg-10 col-md-10 col-sm-12
+    shadow-lg
+    p-5
+    mx-auto
+  "
+>
+  {% csrf_token %}
+  <fieldset class="form-group">
+    <legend class="border-bottom mb-4 text-center">
+      <h2>Create a Classroom</h2>
+    </legend>
+    {{form | crispy}}
+  </fieldset>
+  <div class="form-group mt-5 text-center">
+    <button class="btn btn-outline-dark rounded-0 btn-lg" type="submit">
+      Create
+    </button>
+  </div>
+</form>
+{% endblock content %}
